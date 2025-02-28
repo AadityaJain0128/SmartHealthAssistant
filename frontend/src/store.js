@@ -10,11 +10,11 @@ export default new Vuex.Store({
   mutations: {
     setToken(state, token) {
       state.token = token;
-      localStorage.setItem("token", token); // Persist token
+      localStorage.setItem("token", token);
     },
     logout(state) {
       state.token = null;
-      localStorage.removeItem("token"); // Remove token from local storage
+      localStorage.removeItem("token");
     },
   },
   actions: {

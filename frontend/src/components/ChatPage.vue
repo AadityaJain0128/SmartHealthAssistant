@@ -112,7 +112,7 @@ export default {
   border-radius: 15px;
   max-width: 100%;
   word-wrap: break-word;
-  white-space: pre-wrap; /* Preserve new lines in the message text */
+  white-space: pre-wrap;
 }
 
 .user {
@@ -134,8 +134,8 @@ export default {
   padding: 10px;
   background: #fff;
   border-top: 1px solid #ddd;
-  align-items: center; /* Ensure items are centered vertically */
-  height: 50px; /* Set a fixed height for the input container */
+  align-items: center;
+  height: 50px;
 }
 
 .chat-input textarea {
@@ -144,9 +144,9 @@ export default {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
-  margin-right: 10px; /* Add margin to the right of the input */
-  height: 100%; /* Ensure the input field takes the full height of the container */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  margin-right: 10px;
+  height: 100%;
+  box-sizing: border-box;
   width: 85%;
 }
 
@@ -159,8 +159,8 @@ export default {
   font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
-  height: 100%; /* Ensure the button takes the full height of the container */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  height: 100%;
+  box-sizing: border-box;
   width: 15%;
 }
 
@@ -173,7 +173,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  color: #aaa; /* Muted text color */
+  color: #aaa;
   font-style: italic;
 }
 </style>

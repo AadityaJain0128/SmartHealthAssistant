@@ -8,7 +8,7 @@
     </form>
     <p>Already have an account? <router-link to="/login">Login</router-link></p>
     
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p> <!-- Display error -->
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </div>
 </template>
 
@@ -19,12 +19,12 @@ export default {
     return {
       username: "",
       password: "",
-      errorMessage: "", // Store error messages
+      errorMessage: "",
     };
   },
   methods: {
     async signup() {
-      this.errorMessage = ""; // Clear previous errors
+      this.errorMessage = "";
       try {
         await this.$http.post("/signup", {
           username: this.username,
@@ -33,7 +33,7 @@ export default {
         this.$router.push("/login");
       } catch (error) {
         if (error.response && error.response.data.error) {
-          this.errorMessage = error.response.data.error; // Show backend error
+          this.errorMessage = error.response.data.error;
         } else {
           this.errorMessage = "Signup failed. Please try again.";
         }

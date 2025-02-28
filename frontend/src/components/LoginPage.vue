@@ -34,10 +34,10 @@ export default {
         });
 
         const token = response.data.access_token;
-        this.setToken(token); // Store token in Vuex
+        this.setToken(token);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-        this.$router.push("/chat"); // Redirect to chat page
+        this.$router.push("/chat");
       } catch (error) {
         this.errorMessage = error.response?.data?.error || "Login failed";
       }
