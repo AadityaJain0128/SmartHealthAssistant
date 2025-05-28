@@ -14,9 +14,10 @@ API_KEY = environ.get("API_KEY")
 API_URL = environ.get("API_URL")
 SYSTEM_PROMPT = environ.get("SYSTEM_PROMPT")
 JWT_SECRET_KEY = environ.get("JWT_SECRET_KEY")
+MONGO_URI = environ.get("MONGO_URI")
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/HealthBot"
+app.config["MONGO_URI"] = MONGO_URI
 app.config["JWT_SECRET_KEY"] = JWT_SECRET_KEY
 mongo = PyMongo(app)
 jwt = JWTManager(app)
