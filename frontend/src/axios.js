@@ -6,7 +6,7 @@ axios.interceptors.request.use(config => {
 })
 
 const api = axios.create({
-    baseURL : "https://closing-racer-repeatedly.ngrok-free.app"
+    baseURL : process.env.VUE_APP_BACKEND_URL
 });
 
 
