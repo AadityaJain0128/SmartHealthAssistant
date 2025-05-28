@@ -28,7 +28,7 @@ export default {
     ...mapMutations(["setToken"]),
     async loginUser() {
       try {
-        const response = await this.$http.post("http://localhost:5000/login", {
+        const response = await this.$http.post("/login", {
           username: this.username,
           password: this.password,
         });
