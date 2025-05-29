@@ -7,7 +7,7 @@ import Chat from "./components/ChatPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", redirect: "/login" },
+  { path: "/", redirect: "/chat" },
   { path: "/signup", component: Signup, meta: {title: "Sign Up"} },
   { path: "/login", component: Login, meta: {title: "Login"} },
   { path: "/chat", component: Chat, meta: {title: "Chat Assistance", requiresAuth: true} },
