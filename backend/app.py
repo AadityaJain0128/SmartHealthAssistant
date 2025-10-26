@@ -77,7 +77,7 @@ def chat():
         API_URL,
         headers={"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"},
         json={
-            "model": "llama3-70b-8192",
+            "model": "llama-3.3-70b-versatile",
             "messages": [
                 {
                     "role": "system",
