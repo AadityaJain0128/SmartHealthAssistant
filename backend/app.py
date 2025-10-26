@@ -28,7 +28,6 @@ CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 def home():
     return "Hello"
 
-
 @app.post("/signup")
 def signup():
     data = request.json
@@ -62,7 +61,6 @@ def login():
     access_token = create_access_token(identity=username, expires_delta=timedelta(days=5))
     return jsonify({"access_token": access_token}), 200
 
-
 @app.post("/chat")
 @jwt_required()
 def chat():
@@ -73,28 +71,40 @@ def chat():
     if not user_message:
         return jsonify({"error": "Message is required"}), 400
     
+    messages = [
+        {
+            "role": "system",
+            "content": SYSTEM_PROMPT
+        }
+    ]
+    
+    history_chats = mongo.db.chats.find({"username": username}).sort("timestamp", 1)
+    for chat in history_chats:
+        messages.append({
+            "role": "user",
+            "content": chat["message"]
+        })
+        messages.append({
+            "role": "assistant",
+            "content": chat["response"]
+        })
+
+    messages.append({
+        "role": "user",
+        "content": user_message
+    })
+
     response = requests.post(
         API_URL,
         headers={"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"},
         json={
             "model": "llama-3.3-70b-versatile",
-            "messages": [
-                {
-                    "role": "system",
-                    "content": SYSTEM_PROMPT
-                },
-                {
-                    "role": "user",
-                    "content": user_message
-                }
-            ]
+            "messages": messages
         }
     )
     
     if response.status_code == 200:
         bot_reply = response.json().get("choices", [{}])[0].get("message", {}).get("content", "No response")
-        
-        # Store chat in MongoDB
         chat_entry = {
             "username": username,
             "message": user_message,
@@ -107,13 +117,13 @@ def chat():
     else:
         return jsonify({"error": "Failed to fetch response from Groq API"}), response.status_code
 
-
 @app.get("/chats")
 @jwt_required()
 def get_chats():
     username = get_jwt_identity()
     chats = list(mongo.db.chats.find({"username": username}, {"_id": 0}))
     return jsonify({"chats": chats})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
